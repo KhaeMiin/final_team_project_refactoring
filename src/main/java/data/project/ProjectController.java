@@ -156,7 +156,7 @@ public class ProjectController {
 			@RequestParam java.sql.Date start_date,
 			@RequestParam String time_start, 
 			@RequestParam java.sql.Date end_date) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
 		java.sql.Date today = java.sql.Date.valueOf(sdf.format(start_date));
 		java.sql.Date end_date2 = java.sql.Date.valueOf(sdf.format(end_date));
 		
