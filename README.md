@@ -13,22 +13,20 @@
 ## 2. 사용 기술
 #### `Back-end`
   - Java 8
-  - Spring Boot 2.3
-  - Gradle
-  - Spring Data JPA
-  - QueryDSL
-  - H2
-  - MySQL 5.7
-  - Spring Security
-  - Jsoup
+  - Spring Boot 2.5.6
+  - Maven 3.8
+  - MySQL 8.0.26
+  - Mybatis 2.2
 #### `Front-end`
-  - Vue.js 3.0
-  - Element UI
+  - JavaScript
+  - JQuery
+  - BootStrap
+  - HTML5
 
 </br>
 
 ## 3. ERD 설계
-![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/final_erd.png)
+![](https://user-images.githubusercontent.com/91078445/150670857-0df284d4-0f9b-4586-a072-43aaddbedeca.png)
 
 
 ## 4. 핵심 기능
