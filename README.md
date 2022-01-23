@@ -15,12 +15,12 @@
   - Java 8
   - Spring Boot 2.5.6
   - Maven 3.8
-  - MySQL 8.0.26
+  - MySQL 8.0
   - Mybatis 2.2
 #### `Front-end`
   - JavaScript
-  - JQuery
-  - BootStrap
+  - JQuery 2.2.4
+  - BootStrap 4.1
   - HTML5
 
 </br>
