@@ -145,7 +145,7 @@
 		   }); 
 
 
-		  /* hidden타입의 input에 값 변경시 감지하는 함수 */
+		  /* hidden타입의 input에 값 실시간 변경시 감지하는 함수 */
 		  function survey(selector, callback) {
 		      var input = $(selector);
 		      var oldvalue = input.val();
@@ -190,6 +190,7 @@
 		  });		  
 	});
 </script>
+<!-- summernote -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 

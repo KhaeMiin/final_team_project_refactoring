@@ -36,10 +36,11 @@ public class ProjectController {
 	 * @Value("${file.upload.image}") String path;
 	 */
 	
-	@GetMapping("/project/start")
+	@GetMapping("/project/start")//프로젝트 올리기
 	public String start (HttpSession session) {
+		//로그인 상태 확인
 		String loginok = (String)session.getAttribute("loginok");
-		if(loginok == null) {
+		if(loginok == null) {//로그인이 아닌 경우 로그인페이지로 이동
 			return "redirect:/login/main";
 		}
 		return "/project_create/projectStart";
@@ -110,21 +111,32 @@ public class ProjectController {
 	@PostMapping("/project/defaultUpdate")
 	public String defaultUpdate(@ModelAttribute ProjectDTO dto,HttpServletRequest request) {
 
+		//썸네일 이미지 등록 시
+		
+		//웹 서버 내에 업로드될 폴더를 만들어 업로드하기 위해 필요한 상대경로
 		String path = request.getSession().getServletContext().getRealPath("/thumbnail_image");
+		//getServletContext() : 웹 어플리케이션이 설치되어 있는 경로를 리턴해줌
+		//getRealPath() : ServletContext의 getRealPath는 웹어플리케이션이 실행된 곳. 즉 설치된 곳의 경로를 찾음
+		
 		//String path = "/home/ec2-user/backup/thumbnail_image";
 
+		//저장시 저장된 날짜와 시간,분,초를 파일명뒤에 확인용으로 넣기 위해
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 
-		if (dto.getUpload().getOriginalFilename().equals("")) {
+		
+		if (dto.getUpload().getOriginalFilename().equals("")) {//만약 이미지를 아무것도 업로드 하지 않은 상태면
 			dto.setThumbnail(null);
-		} else {
+		} else {//이미지가 업로드 된 상태라면
 			String uploadfile = service.getData(Integer.toString(dto.getIdx())).getThumbnail();
+			//file객체 생성
 			File file1 = new File(path + "/" + uploadfile);
-			file1.delete();
+			file1.delete();//기존 이미지는 삭제하기
 			
+			//저장될 이미지명
 			String thumbnail = sdf.format(new Date()) + "_" + dto.getUpload().getOriginalFilename();
 			dto.setThumbnail(thumbnail);
 
+			//업로드
 			try {
 				dto.getUpload().transferTo(new File(path + "/" + thumbnail));
 			} catch (IllegalStateException | IOException e) {
