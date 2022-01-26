@@ -1,5 +1,4 @@
 
-
 # :pushpin: Bunddeuk - 크리에이터를 위한 크라우드 펀딩사이트
 >본인의 아이디어 상품을 소개하고 후원을 받을 수 있는 펀딩사이트
 >https://bit.ly/3KMdACS
@@ -171,7 +170,9 @@
 	<Context docBase="서버의 upload 폴더경로" path="URL상의 upload 폴더경로" reloadable="true" />
 ```
 
--  MvcConfiguration클래스를 만들어 **기존 코드**와 같이 WebMvcConfigurer를 implement 합니다. 그 후 ResourceHandler를  추가해줍니다.
+-  MvcConfiguration클래스를 만들어 **추가된클래스**와 같이 WebMvcConfigurer를 implement 합니다. 
+- 그 후, addResourceHandlers 메서드를 override합니다.
+- 그리고 아래 **추가된클래스** 처럼 새로 resource handler를 추가해줍니다.
 
 <details>
 <summary><b>추가된 클래스</b></summary>
