@@ -165,7 +165,8 @@
 - 톰캣 설정변경을 통해 톰캣으로 웹 프로젝트를 실행 시 웹 파일이 담겨질 위치를 정할 수 있습니다.
 ```
 	vim <tomcat 설치 디렉토리>/conf/server.xml > server.xml파일을 열어서
-	<Context docBase="/home/ec2-user/backup/thumbnail" path="/thumbnail" reloadable="true" /> //</Host>라고 되어있는 부분 윗줄에 Context부분을 추가해줍니다.
+	<Context docBase="/home/ec2-user/backup/thumbnail" path="/thumbnail" reloadable="true" /> 
+	//</Host>라고 되어있는 부분 윗줄에 Context부분을 추가해줍니다.
 
 	<Context docBase="서버의 upload 폴더경로" path="URL상의 upload 폴더경로" reloadable="true" />
 ```
