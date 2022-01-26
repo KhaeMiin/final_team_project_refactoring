@@ -1,4 +1,5 @@
 
+
 # :pushpin: Bunddeuk - 크리에이터를 위한 크라우드 펀딩사이트
 >본인의 아이디어 상품을 소개하고 후원을 받을 수 있는 펀딩사이트
 >https://bit.ly/3KMdACS
@@ -158,9 +159,7 @@
 </details>
 
 - 우선 EC2 인스턴스에 접속 후 이미지가 저장될 새로운 디렉토리를 생성해줍니다.
-```
-	mkdir -p ~/backup/thumbnail(upload 폴더)
-```
+`mkdir -p ~/backup/thumbnail(upload 폴더)`
 
 - 톰캣 설정변경을 통해 톰캣으로 웹 프로젝트를 실행 시 웹 파일이 담겨질 위치를 정할 수 있습니다.
 ```
@@ -215,21 +214,23 @@ public class MvcConfiguration implements WebMvcConfigurer{
 
 ## 6. 그 외 트러블 슈팅
 <details>
-<summary>npm run dev 실행 오류</summary>
+<summary>maven을 이용하여 서버 배포중 build시 발생한 에러</summary>
 <div markdown="1">
 
-- Webpack-dev-server 버전을 3.0.0으로 다운그레이드로 해결
-- `$ npm install —save-dev webpack-dev-server@3.0.0`
+- 에러메세지
+	- No goals have been specified for this build. You must specify a valid lifecycle phase or a goal in the format <plugin-prefix>:<goal> or <plugin-group-id>:<plugin-artifact-id>[:<plugin-version>]:<goal>. Available lifecycle phases are: validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy, pre-clean, clean, post-clean, pre-site, site, post-site, site-deploy. -> [Help 1]
+- 번역기를 돌려보니 빌드에는 목표가 지정되어 있지 않아서 에러가 생기는 걸 알 수 있음.
+- <build>안에 <defaultGoal>install</defaultGoal>를 추가함
+`$<defaultGoal>: 아무것도 지정하지 않은 goal의 실행시 실행되는 목표(install, clean, package, build등)`
 
 </div>
 </details>
 
 <details>
-<summary>vue-devtools 크롬익스텐션 인식 오류 문제</summary>
+<summary>한글 데이터를 insert시 에러가남</summary>
 <div markdown="1">
   
-  - main.js 파일에 `Vue.config.devtools = true` 추가로 해결
-  - [https://github.com/vuejs/vue-devtools/issues/190](https://github.com/vuejs/vue-devtools/issues/190)
+  - 테이블 생성 시 DEFAULT CHARSET=utf8;를 추가하여 해결
   
 </div>
 </details>
@@ -256,24 +257,18 @@ public class MvcConfiguration implements WebMvcConfigurer{
 </details>
     
 <details>
-<summary> 프로젝트를 git init으로 생성 후 발생하는 npm run dev/build 오류 문제 </summary>
+<summary> git push -u origin dev 실행 시 SSL 인증서 오류 발생</summary>
 <div markdown="1">
-  
-  ```jsx
-    $ npm run dev
-    npm ERR! path C:\Users\integer\IdeaProjects\pilot\package.json
-    npm ERR! code ENOENT
-    npm ERR! errno -4058
-    npm ERR! syscall open
-    npm ERR! enoent ENOENT: no such file or directory, open 'C:\Users\integer\IdeaProjects\pilot\package.json'
-    npm ERR! enoent This is related to npm not being able to find a file.
-    npm ERR! enoent
 
-    npm ERR! A complete log of this run can be found in:
-    npm ERR!     C:\Users\integer\AppData\Roaming\npm-cache\_logs\2019-02-25T01_23_19_131Z-debug.log
-  ```
-  
-  - 단순히 npm run dev/build 명령을 입력한 경로가 문제였다.
+  - git push -u origin dev 실행 시
+ SSL certificate problem: self signed certificate in certificate chain 발생
+ - git config --global http.sslVerify false(SSL 인증서가 필요없기에 git 설정에서 SSL 인증서를 필요로 하는 옵션을 종료시킨다.)
+로 해결
+
+※여기서 궁금증! SSL이란 무엇일까? 
+	- SSL(Secure Socket Layer)은 웹서버(서버)와 브라우저(클라이언트) 사이의 보안을 위해 만들었다.(보안인증서라고 하자)
+	- 정리:간단하게 말하면 들어오고 나가는 데이터들을 암호화하는 보안 기능을 갖고 있는 ‘보안 인증서’
+
    
 </div>
 </details>    
