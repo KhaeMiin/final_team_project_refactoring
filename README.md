@@ -1,3 +1,4 @@
+
 # :pushpin: Bunddeuk - 크리에이터를 위한 크라우드 펀딩사이트
 >본인의 아이디어 상품을 소개하고 후원을 받을 수 있는 펀딩사이트
 >https://bit.ly/3KMdACS
@@ -96,15 +97,16 @@
 </br>
 
 ## 5. 핵심 트러블 슈팅
-### 5.1. 컨텐츠 필터와 페이징 처리 문제
-- 저는 이 서비스가 페이스북이나 인스타그램 처럼 가볍게, 자주 사용되길 바라는 마음으로 개발했습니다.  
-때문에 페이징 처리도 무한 스크롤을 적용했습니다.
+### 5.1. 배포한 웹 서버에서 이미지 업로드 시 404 에러
+<img src=https://user-images.githubusercontent.com/91078445/151153439-4dcc5eaf-3d00-4912-a158-69de1adf3849.png width="400"><img src=https://user-images.githubusercontent.com/91078445/151155125-b83dcdff-7522-4218-bd56-8fd14f64a9a0.JPG width="400"><br>
 
-- 하지만 [무한스크롤, 페이징 혹은 “더보기” 버튼? 어떤 걸 써야할까](https://cyberx.tistory.com/82) 라는 글을 읽고 무한 스크롤의 단점들을 알게 되었고,  
-다양한 기준(카테고리, 사용자, 등록일, 인기도)의 게시물 필터 기능을 넣어서 이를 보완하고자 했습니다.
+- 서버를 배포하기 전 로컬에서 작업을 했던 저는 프로젝트 내부에 이미지가 업로드될 폴더를 만들어서 웹에서 클라이언트가 이미지를 업로드시 내부에 저장이 되도록 설정하였습니다.
+- Putty를 이용하여 EC2인스턴스에 접속하여  Git을 이용하여 서비스를 배포하였습니다.
 
-- 그런데 게시물이 필터링 된 상태에서 무한 스크롤이 동작하면,  
-필터링 된 게시물들만 DB에 요청해야 하기 때문에 아래의 **기존 코드** 처럼 각 필터별로 다른 Query를 날려야 했습니다.
+- 하지만 서버를 작동했을때 웹에서 이미지업로드시 프로젝트 내부에 만들어놓은 폴더에 이미지가 추가되지 않았고 결론적으로 이미지를 찾을 수 없다는 404가 나왔습니다.
+-  그리고 검색을 하면서 (https://kimfk567.tistory.com/85) 라는 글을 읽고 배포 후 썸네일이미지,프로필사진에 사용하는 파일 외부저장소의 위치를 AWS 서버로 위치를 바꿔주어야 한다는 것을 알게되었습니다.
+
+- MvcConfiguration클래스를 만들어 **기존 코드**MvcConfiguration와 같이 WebMvcConfigurer를 implement(구현) 합니다.
 
 <details>
 <summary><b>기존 코드</b></summary>
@@ -112,53 +114,83 @@
 
 ~~~java
 /**
- * 게시물 Top10 (기준: 댓글 수 + 좋아요 수)
- * @return 인기순 상위 10개 게시물
+ * MvcConfiguration.java
  */
-public Page<PostResponseDto> listTopTen() {
+public class MvcConfiguration implements WebMvcConfigurer{
 
-    PageRequest pageRequest = PageRequest.of(0, 10, Sort.Direction.DESC, "rankPoint", "likeCnt");
-    return postRepository.findAll(pageRequest).map(PostResponseDto::new);
+   @Override
+   public void addResourceHandlers(ResourceHandlerRegistry registry) {
+      /* '/js/**'로 호출하는 자원은 '/static/js/' 폴더 아래에서 찾는다. */ 
+        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/").setCachePeriod(60 * 60 * 24 * 365); 
+      /* '/css/**'로 호출하는 자원은 '/static/css/' 폴더 아래에서 찾는다. */ 
+        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/").setCachePeriod(60 * 60 * 24 * 365); 
+      /* '/img/**'로 호출하는 자원은 '/static/img/' 폴더 아래에서 찾는다. */ 
+        registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/").setCachePeriod(60 * 60 * 24 * 365); 
+      /* '/fonts/**'로 호출하는 자원은 '/static/fonts/' 폴더 아래에서 찾는다. */ 
+        registry.addResourceHandler("/fonts/**").addResourceLocations("classpath:/static/fonts/").setCachePeriod(60 * 60 * 24 * 365); 
+        registry.addResourceHandler("/style/**").addResourceLocations("classpath:/static/fonts/").setCachePeriod(60 * 60 * 24 * 365); 
+
+   }
 }
-
-/**
- * 게시물 필터 (Tag Name)
- * @param tagName 게시물 박스에서 클릭한 태그 이름
- * @param pageable 페이징 처리를 위한 객체
- * @return 해당 태그가 포함된 게시물 목록
- */
-public Page<PostResponseDto> listFilteredByTagName(String tagName, Pageable pageable) {
-
-    return postRepository.findAllByTagName(tagName, pageable).map(PostResponseDto::new);
-}
-
-// ... 게시물 필터 (Member) 생략 
-
-/**
- * 게시물 필터 (Date)
- * @param createdDate 게시물 박스에서 클릭한 날짜
- * @return 해당 날짜에 등록된 게시물 목록
- */
-public List<PostResponseDto> listFilteredByDate(String createdDate) {
-
-    // 등록일 00시부터 24시까지
-    LocalDateTime start = LocalDateTime.of(LocalDate.parse(createdDate), LocalTime.MIN);
-    LocalDateTime end = LocalDateTime.of(LocalDate.parse(createdDate), LocalTime.MAX);
-
-    return postRepository
-                    .findAllByCreatedAtBetween(start, end)
-                    .stream()
-                    .map(PostResponseDto::new)
-                    .collect(Collectors.toList());
-    }
 ~~~
+```java
+/**
+ * ProjectController.java
+ */
+	@PostMapping("/project/defaultUpdate")
+	public String defaultUpdate(@ModelAttribute ProjectDTO dto,HttpServletRequest request) {
+
+		//썸네일 이미지 등록 시
+		
+		//웹 서버 내에 업로드될 폴더를 만들어 업로드하기 위해 필요한 상대경로
+		String path = request.getSession().getServletContext().getRealPath("/thumbnail_image");
+		//getServletContext() : 웹 어플리케이션이 설치되어 있는 경로를 리턴해줌
+		//getRealPath() : ServletContext의 getRealPath는 웹어플리케이션이 실행된 곳. 즉 설치된 곳의 경로를 찾음
+		
+		//저장시 저장된 날짜와 시간,분,초를 파일명뒤에 확인용으로 넣기 위해
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		
+		if (dto.getUpload().getOriginalFilename().equals("")) {//만약 이미지를 아무것도 업로드 하지 않은 상태면
+			dto.setThumbnail(null);
+		} else {//이미지가 업로드 된 상태라면
+			String uploadfile = service.getData(Integer.toString(dto.getIdx())).getThumbnail();
+			//file객체 생성
+			File file1 = new File(path + "/" + uploadfile);
+			file1.delete();//기존 이미지는 삭제하기
+			
+			//저장될 이미지명
+			String thumbnail = sdf.format(new Date()) + "_" + dto.getUpload().getOriginalFilename();
+			dto.setThumbnail(thumbnail);
+
+			//업로드
+			try {
+				dto.getUpload().transferTo(new File(path + "/" + thumbnail));
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+		service.defaultUpdate(dto);
+		return "redirect:editor?idx=" + dto.getIdx();
+	}
+```
 
 </div>
 </details>
 
-- 이 때 카테고리(tag)로 게시물을 필터링 하는 경우,  
-각 게시물은 최대 3개까지의 카테고리(tag)를 가질 수 있어 해당 카테고리를 포함하는 모든 게시물을 질의해야 했기 때문에  
-- 아래 **개선된 코드**와 같이 QueryDSL을 사용하여 다소 복잡한 Query를 작성하면서도 페이징 처리를 할 수 있었습니다.
+- 우선 EC2 인스턴스에 접속 후 이미지가 저장될 새로운 디렉토리를 생성해줍니다.
+```
+	mkdir -p ~/backup/thumbnail(upload 폴더)
+```
+
+- 톰캣 설정변경을 통해 톰캣으로 웹 프로젝트를 실행 시 웹 파일이 담겨질 위치를 정할 수 있습니다.
+```
+	vim <tomcat 설치 디렉토리>/conf/server.xml > server.xml파일을 열어서
+	<Context docBase="/home/ec2-user/backup/thumbnail" path="/thumbnail" reloadable="true" /> //</Host>라고 되어있는 부분 윗줄에 Context부분을 추가해줍니다.
+
+	<Context docBase="서버의 upload 폴더경로" path="URL상의 upload 폴더경로" reloadable="true" />
+```
+
+- 아래 **개선된 코드**와 같이 ResourceHandler를  추가해줍니다.
 
 <details>
 <summary><b>개선된 코드</b></summary>
@@ -166,24 +198,30 @@ public List<PostResponseDto> listFilteredByDate(String createdDate) {
 
 ~~~java
 /**
- * 게시물 필터 (Tag Name)
+ * WebMvcConfigurer.java
  */
-@Override
-public Page<Post> findAllByTagName(String tagName, Pageable pageable) {
+public class MvcConfiguration implements WebMvcConfigurer{
+//	@Value("${file.upload.image}")
+//	String path;
 
-    QueryResults<Post> results = queryFactory
-            .selectFrom(post)
-            .innerJoin(postTag)
-                .on(post.idx.eq(postTag.post.idx))
-            .innerJoin(tag)
-                .on(tag.idx.eq(postTag.tag.idx))
-            .where(tag.name.eq(tagName))
-            .orderBy(post.idx.desc())
-                .limit(pageable.getPageSize())
-                .offset(pageable.getOffset())
-            .fetchResults();
-
-    return new PageImpl<>(results.getResults(), pageable, results.getTotal());
+   @Override
+   public void addResourceHandlers(ResourceHandlerRegistry registry) {
+      /* '/js/**'로 호출하는 자원은 '/static/js/' 폴더 아래에서 찾는다. */ 
+        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/").setCachePeriod(60 * 60 * 24 * 365); 
+      /* '/css/**'로 호출하는 자원은 '/static/css/' 폴더 아래에서 찾는다. */ 
+        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/").setCachePeriod(60 * 60 * 24 * 365); 
+      /* '/img/**'로 호출하는 자원은 '/static/img/' 폴더 아래에서 찾는다. */ 
+        registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/").setCachePeriod(60 * 60 * 24 * 365); 
+      /* '/fonts/**'로 호출하는 자원은 '/static/fonts/' 폴더 아래에서 찾는다. */ 
+        registry.addResourceHandler("/fonts/**").addResourceLocations("classpath:/static/fonts/").setCachePeriod(60 * 60 * 24 * 365); 
+        registry.addResourceHandler("/style/**").addResourceLocations("classpath:/static/fonts/").setCachePeriod(60 * 60 * 24 * 365); 
+        registry
+        .addResourceHandler("/thumbnail_image/**")//'/thumbnail_image/**'로 호출하는 자원은 '*/
+        .addResourceLocations("file:/home/ec2-user/backup/thumbnail_image");/*'file:/home/ec2-user/backup/thumbnail_image' 폴더 아래에서 찾는다.*/
+        registry
+        .addResourceHandler("/profile_image/**")/*'/profile_image/**'로 호출하는 자원은 '*/
+        .addResourceLocations("file:/home/ec2-user/backup/profile_image");/*'file:/home/ec2-user/backup/profile_image' 폴더 아래에서 찾는다.*/
+   }
 }
 ~~~
 
