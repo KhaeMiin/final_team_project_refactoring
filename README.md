@@ -1,4 +1,5 @@
 
+
 # :pushpin: Bunddeuk - 크리에이터를 위한 크라우드 펀딩사이트
 >본인의 아이디어 상품을 소개하고 후원을 받을 수 있는 펀딩사이트
 >https://bit.ly/3KMdACS
@@ -106,33 +107,13 @@
 - 하지만 서버를 작동했을때 웹에서 이미지업로드시 프로젝트 내부에 만들어놓은 폴더에 이미지가 추가되지 않았고 결론적으로 이미지를 찾을 수 없다는 404가 나왔습니다.
 -  그리고 검색을 하면서 (https://kimfk567.tistory.com/85) 라는 글을 읽고 배포 후 썸네일이미지,프로필사진에 사용하는 파일 외부저장소의 위치를 AWS 서버로 위치를 바꿔주어야 한다는 것을 알게되었습니다.
 
-- MvcConfiguration클래스를 만들어 **기존 코드**MvcConfiguration와 같이 WebMvcConfigurer를 implement(구현) 합니다.
+-  **기존 코드**에서는 웹 서버 내에 업로드될 폴더를 만들어 업로드하기 위해 필요한 상대경로를 path로 설정하였습니다.
+(※해당 코드의 문제점은 재배포할 때 마다 폴더가 초기화됨)
 
 <details>
 <summary><b>기존 코드</b></summary>
 <div markdown="1">
 
-~~~java
-/**
- * MvcConfiguration.java
- */
-public class MvcConfiguration implements WebMvcConfigurer{
-
-   @Override
-   public void addResourceHandlers(ResourceHandlerRegistry registry) {
-      /* '/js/**'로 호출하는 자원은 '/static/js/' 폴더 아래에서 찾는다. */ 
-        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/").setCachePeriod(60 * 60 * 24 * 365); 
-      /* '/css/**'로 호출하는 자원은 '/static/css/' 폴더 아래에서 찾는다. */ 
-        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/").setCachePeriod(60 * 60 * 24 * 365); 
-      /* '/img/**'로 호출하는 자원은 '/static/img/' 폴더 아래에서 찾는다. */ 
-        registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/").setCachePeriod(60 * 60 * 24 * 365); 
-      /* '/fonts/**'로 호출하는 자원은 '/static/fonts/' 폴더 아래에서 찾는다. */ 
-        registry.addResourceHandler("/fonts/**").addResourceLocations("classpath:/static/fonts/").setCachePeriod(60 * 60 * 24 * 365); 
-        registry.addResourceHandler("/style/**").addResourceLocations("classpath:/static/fonts/").setCachePeriod(60 * 60 * 24 * 365); 
-
-   }
-}
-~~~
 ```java
 /**
  * ProjectController.java
@@ -190,10 +171,10 @@ public class MvcConfiguration implements WebMvcConfigurer{
 	<Context docBase="서버의 upload 폴더경로" path="URL상의 upload 폴더경로" reloadable="true" />
 ```
 
-- 아래 **개선된 코드**와 같이 ResourceHandler를  추가해줍니다.
+-  MvcConfiguration클래스를 만들어 **기존 코드**와 같이 WebMvcConfigurer를 implement 합니다. 그 후 ResourceHandler를  추가해줍니다.
 
 <details>
-<summary><b>개선된 코드</b></summary>
+<summary><b>추가된 클래스</b></summary>
 <div markdown="1">
 
 ~~~java
