@@ -1,6 +1,7 @@
 
 
 
+
 # :pushpin: Bunddeuk - 크리에이터를 위한 크라우드 펀딩사이트
 >본인의 아이디어 상품을 소개하고 후원을 받을 수 있는 펀딩사이트
 >https://bit.ly/3KMdACS
@@ -42,40 +43,39 @@
 <div markdown="1">
 
 ### 4.1. 전체 흐름
-![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow1.png)
+![](https://user-images.githubusercontent.com/91078445/151754311-c69dc779-f875-4d32-8aeb-db5814c9325e.JPG)
+Web Browser가 데이터를 요청을 하면 DB에서 데이터를 return 하여 Web Browser가 데이터를 받을 수 있게 되어있습니다.
+### 4.2. Controller
+![](https://user-images.githubusercontent.com/91078445/151757782-56bacb66-89db-4b17-b927-1b8b0d294985.JPG)
 
-### 4.2. 사용자 요청
-![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow_vue.png)
+- **요청 처리** :pushpin: [코드 확인](https://github.com/KhaeMiin/Final_Team_Project/blob/master/src/main/java/data/project/ProjectController.java#L26)
+  - Controller는 웹 브라우저의 요청을 전담하여 처리합니다.
+  - Controller가 Service를 호출 합니다.
 
-- **URL 정규식 체크** :pushpin: [코드 확인](https://github.com/Integerous/goQuality/blob/b587bbff4dce02e3bec4f4787151a9b6fa326319/frontend/src/components/PostInput.vue#L67)
-  - Vue.js로 렌더링된 화면단에서, 사용자가 등록을 시도한 URL의 모양새를 정규식으로 확인합니다.
-  - URL의 모양새가 아닌 경우, 에러 메세지를 띄웁니다.
+- **결과 응답** :pushpin: [코드 확인](https://github.com/KhaeMiin/Final_Team_Project/blob/master/src/main/webapp/WEB-INF/project_create/projectStart.jsp#L49)
+  - Service 계층에서 넘어온 로직 처리 결과를 화면단에 응답해줍니다.
+  - 사용자는 프로젝트를 작성하는 페이지로 이동하여 프로젝트를 올릴 수 있습니다.
 
-- **Axios 비동기 요청** :pushpin: [코드 확인]()
-  - URL의 모양새인 경우, 컨텐츠를 등록하는 POST 요청을 비동기로 날립니다.
-
-### 4.3. Controller
+### 4.3. Service
 
 ![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow_controller.png)
 
-- **요청 처리** :pushpin: [코드 확인](https://github.com/Integerous/goQuality/blob/b2c5e60761b6308f14eebe98ccdb1949de6c4b99/src/main/java/goQuality/integerous/controller/PostRestController.java#L55)
-  - Controller에서는 요청을 화면단에서 넘어온 요청을 받고, Service 계층에 로직 처리를 위임합니다.
+![service](https://user-images.githubusercontent.com/84839167/148083716-4f125f91-9c93-4c39-a0f5-f9af19e5a3e5.png)
+- **Service는 비지니스 로직을 수행하기 위해 데이터베이스에 접근하는 Mapper를 이용해서 결과값을 받아 옵니다.** :pushpin: [코드 확인](https://github.com/KhaeMiin/Final_Team_Project/blob/master/src/main/java/data/project/ProjectService.java#L9)
+  - Service는 두가지를 구현해야합니다.
+	  1. service interface [코드확인](https://github.com/KhaeMiin/Final_Team_Project/blob/master/src/main/java/data/project/ProjectMapper.java#L8)
+	  2. service interface를 구현한 class 만들기 (service interface 구현체) [코드확인](https://github.com/KhaeMiin/Final_Team_Project/blob/master/src/main/java/data/project/ProjectService.java#L9)
+  - Service가 DAO를 호출합니다. (DAO는 데이터베이스에 접속하여 비즈니스 로직 실행에 필요한 쿼리를 호출합니다)
+  우리는 DAO를 사용하지않고 **Mapper**를 사용할 것입니다.
 
-- **결과 응답** :pushpin: [코드 확인]()
-  - Service 계층에서 넘어온 로직 처리 결과(메세지)를 화면단에 응답해줍니다.
+### 4.4. Mapper
 
-### 4.4. Service
 
-![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow_service1.png)
-
-- **Http 프로토콜 추가 및 trim()** :pushpin: [코드 확인]()
-  - 사용자가 URL 입력 시 Http 프로토콜을 생략하거나 공백을 넣은 경우,  
-  올바른 URL이 될 수 있도록 Http 프로토콜을 추가해주고, 공백을 제거해줍니다.
-
-- **URL 접속 확인** :pushpin: [코드 확인]()
-  - 화면단에서 모양새만 확인한 URL이 실제 리소스로 연결되는지 HttpUrlConnection으로 테스트합니다.
-  - 이 때, 빠른 응답을 위해 Request Method를 GET이 아닌 HEAD를 사용했습니다.
-  - (HEAD 메소드는 GET 메소드의 응답 결과의 Body는 가져오지 않고, Header만 확인하기 때문에 GET 메소드에 비해 응답속도가 빠릅니다.)
+![mapper](https://user-images.githubusercontent.com/84839167/148793806-73537088-8063-4089-955a-766a9747fc0a.png)
+- **컨텐츠 저장** :pushpin: [코드 확인](https://github.com/jeejee1106/FinalProject_update/blob/04960884529d2b3d375abf1cbd21509377ba907c/src/main/resources/mappers/supportSQL.xml#L4)
+  - 결제(후원)를 완료하면 Mapper.xml 파일에서 SQL문을 실행하며, 실행 결과를 다시 반환 합니다.
+  - 결제(후원)을 완료한 사용자와 프로젝트 정보는 DB에 저장됩니다.
+  - 저장된 컨텐츠는 다시 Mapper - Service - Controller를 거쳐 화면단에 출력됩니다.
 
   ![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow_service2.png)
 
@@ -83,15 +83,6 @@
   - URL 접속 확인결과 유효하면 Jsoup을 사용해서 입력된 URL의 이미지와 제목을 파싱합니다.
   - 이미지는 Open Graphic Tag를 우선적으로 파싱하고, 없을 경우 첫 번째 이미지와 제목을 파싱합니다.
   - 컨텐츠에 이미지가 없을 경우, 미리 설정해둔 기본 이미지를 사용하고, 제목이 없을 경우 생략합니다.
-
-
-### 4.5. Repository
-
-![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow_repo.png)
-
-- **컨텐츠 저장** :pushpin: [코드 확인]()
-  - URL 유효성 체크와 이미지, 제목 파싱이 끝난 컨텐츠는 DB에 저장합니다.
-  - 저장된 컨텐츠는 다시 Repository - Service - Controller를 거쳐 화면단에 송출됩니다.
 
 </div>
 </details>
