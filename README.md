@@ -175,6 +175,7 @@
 -  MvcConfiguration클래스를 만들어 **추가된클래스**와 같이 WebMvcConfigurer를 implement 합니다. 
 - 그 후, addResourceHandlers 메서드를 override합니다.
 - 그리고 아래 **추가된 클래스** 처럼 새로 resource handler를 추가하였습니다.
+- 참고 블로그: https://dundung.tistory.com/241
 
 <details>
 <summary><b>추가된 클래스</b></summary>
