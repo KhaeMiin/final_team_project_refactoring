@@ -95,7 +95,7 @@ Web Browser가 데이터를 요청을 하면 DB에서 데이터를 return 하여
 
 - 프로젝트 작성시 또는 프로필 수정시 이미지를 업로드 할 때 진행중인 프로젝트의 workspace에 파일이 업로드 되도록 하였습니다.
 - 업로드 경로: https://github.com/KhaeMiin/Final_Team_Project/tree/master/src/main/webapp/profile_image
-- Putty를 이용하여 EC2 인스턴스에 접속하여  Git을 이용하여 Project Clone 후 서비스를 배포하였습니다.
+- Putty를 이용하여 EC2 인스턴스에 접속하여  Git을 이용하여 Project Clone 후 서비스를 배포하였습니다.<br>
 참고 블로그: https://loosie.tistory.com/408
 
 - 하지만 서버를 작동했을 때 실행되는 경로(배포 경로)와 업로드 경로(workspace)가 다르기 때문에  
