@@ -46,7 +46,7 @@
 ![](https://user-images.githubusercontent.com/91078445/151754311-c69dc779-f875-4d32-8aeb-db5814c9325e.JPG)
 Web Browser가 데이터를 요청을 하면 DB에서 데이터를 return 하여 Web Browser가 데이터를 받을 수 있게 되어있습니다.
 ### 4.2. Controller
-![](https://user-images.githubusercontent.com/91078445/151757782-56bacb66-89db-4b17-b927-1b8b0d294985.JPG)
+![Controller](https://user-images.githubusercontent.com/91078445/151757782-56bacb66-89db-4b17-b927-1b8b0d294985.JPG)
 
 - **요청 처리** :pushpin: [코드 확인](https://github.com/KhaeMiin/Final_Team_Project/blob/master/src/main/java/data/project/ProjectController.java#L26)
   - Controller는 웹 브라우저의 요청을 전담하여 처리합니다.
@@ -60,7 +60,7 @@ Web Browser가 데이터를 요청을 하면 DB에서 데이터를 return 하여
 
 ![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow_controller.png)
 
-![service](https://user-images.githubusercontent.com/84839167/148083716-4f125f91-9c93-4c39-a0f5-f9af19e5a3e5.png)
+![service]()
 - **Service는 비지니스 로직을 수행하기 위해 데이터베이스에 접근하는 Mapper를 이용해서 결과값을 받아 옵니다.** :pushpin: [코드 확인](https://github.com/KhaeMiin/Final_Team_Project/blob/master/src/main/java/data/project/ProjectService.java#L9)
   - Service는 두가지를 구현해야합니다.
 	  1. service interface [코드확인](https://github.com/KhaeMiin/Final_Team_Project/blob/master/src/main/java/data/project/ProjectMapper.java#L8)
@@ -71,7 +71,7 @@ Web Browser가 데이터를 요청을 하면 DB에서 데이터를 return 하여
 ### 4.4. Mapper
 
 
-![mapper](https://user-images.githubusercontent.com/84839167/148793806-73537088-8063-4089-955a-766a9747fc0a.png)
+![mapper]()
 - **컨텐츠 저장** :pushpin: [코드 확인](https://github.com/jeejee1106/FinalProject_update/blob/04960884529d2b3d375abf1cbd21509377ba907c/src/main/resources/mappers/supportSQL.xml#L4)
   - 결제(후원)를 완료하면 Mapper.xml 파일에서 SQL문을 실행하며, 실행 결과를 다시 반환 합니다.
   - 결제(후원)을 완료한 사용자와 프로젝트 정보는 DB에 저장됩니다.
