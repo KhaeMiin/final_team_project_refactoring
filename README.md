@@ -31,8 +31,8 @@
 </br>
 
 ## 3. ERD 설계
-![](https://user-images.githubusercontent.com/91078445/150670857-0df284d4-0f9b-4586-a072-43aaddbedeca.png)
-
+<img src=https://user-images.githubusercontent.com/91078445/150670857-0df284d4-0f9b-4586-a072-43aaddbedeca.png width="500">
+<br>
 
 ## 4. 핵심 기능
 이 서비스의 핵심 기능은 컨텐츠 등록 기능입니다.  
