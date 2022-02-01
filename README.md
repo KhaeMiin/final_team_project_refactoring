@@ -2,6 +2,7 @@
 
 
 
+
 # :pushpin: Bunddeuk - 크리에이터를 위한 크라우드 펀딩사이트
 >본인의 아이디어 상품을 소개하고 후원을 받을 수 있는 펀딩사이트
 >https://bit.ly/3KMdACS
@@ -56,7 +57,27 @@ Web Browser가 데이터를 요청을 하면 DB에서 데이터를 return 하여
   - Service 계층에서 넘어온 로직 처리 결과를 화면단에 응답해줍니다.
   - 사용자는 프로젝트를 작성하는 페이지로 이동하여 프로젝트를 올릴 수 있습니다.
 
+### 4.3. Service
 
+![](https://user-images.githubusercontent.com/91078445/151934797-aef9c9bf-d87e-4033-8e9e-db234f2a5a0d.JPG)
+
+![service]()
+- **카테고리별 작성한 컨텐츠 저장 또는 수정시 출력 Mapper 호출** :pushpin: [코드 확인](https://github.com/KhaeMiin/Final_Team_Project/blob/master/src/main/java/data/project/ProjectService.java#L9)
+  - Service는 두가지를 구현해야합니다.
+	  1. service interface [코드확인](https://github.com/KhaeMiin/Final_Team_Project/blob/master/src/main/java/data/project/ProjectMapper.java#L8)
+	  2. service interface를 구현한 class 만들기 (service interface 구현체) [코드확인](https://github.com/KhaeMiin/Final_Team_Project/blob/master/src/main/java/data/project/ProjectService.java#L9)
+  - Service가 DAO를 호출합니다. (DAO는 데이터베이스에 접속하여 비즈니스 로직 실행에 필요한 쿼리를 호출합니다)
+  저희는 DAO를 사용하지않고 **Mapper**를 사용하였습니다.
+
+### 4.4. Mapper
+
+
+![mapper](https://user-images.githubusercontent.com/91078445/151973323-f154eec5-4c3e-4437-86c4-0894df4705da.JPG)
+- **작성한 컨텐츠 저장** :pushpin: [코드 확인](https://github.com/KhaeMiin/Final_Team_Project/blob/master/src/main/resources/mappers/projectCreateSQL.xml#L3)
+  - 양식에 맞게 작성 후 등록하기 버튼을 누리게 되면 해당 Mapper interface의 Method를 호출하게 됩니다.
+  - 호출된 Method명과 동일한 XML파일의 id를 맵핑하여 SQL문을 호출합니다.
+  - 카테고리별 양식에 맞게 작성한 컨텐츠 정보는 DB에 저장됩니다.
+  - 출력시 SQL문을 호출하여 받은 결과값은 다시 Mapper > Service > Controller > Web Browser 순서로 반환되어 출력됩니다.
 </div>
 </details>
 
