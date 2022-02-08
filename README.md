@@ -255,7 +255,7 @@ public class MvcConfiguration implements WebMvcConfigurer{
 >프로젝트 개발 회고 글: https://intelliy-min.tistory.com/8
 	
 *블로그 회고글 중	
-## 간단한 KPT
+### 간단한 KPT
 ​
 #### Keep
 ​
