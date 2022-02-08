@@ -200,7 +200,7 @@ public class MvcConfiguration implements WebMvcConfigurer{
 - 에러메세지
 	- No goals have been specified for this build. You must specify a valid lifecycle phase or a goal in the format <plugin-prefix>:<goal> or <plugin-group-id>:<plugin-artifact-id>[:<plugin-version>]:<goal>. Available lifecycle phases are: validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy, pre-clean, clean, post-clean, pre-site, site, post-site, site-deploy. -> [Help 1]
 - 번역기를 돌려보니 빌드에는 목표가 지정되어 있지 않아서 에러가 생기는 걸 알 수 있음.
-- <build>안에 <defaultGoal>install</defaultGoal>를 추가함
+- pom.xml에  <defaultGoal>install</defaultGoal>를 <build> 태그 안에 추가함
 `$<defaultGoal>: 아무것도 지정하지 않은 goal의 실행시 실행되는 목표(install, clean, package, build등)`
 
 </div>
