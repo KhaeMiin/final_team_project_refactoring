@@ -64,7 +64,6 @@ Web Browser가 데이터를 요청을 하면 DB에서 데이터를 return 하여
 
 ![](https://user-images.githubusercontent.com/91078445/151934797-aef9c9bf-d87e-4033-8e9e-db234f2a5a0d.JPG)
 
-![service]()
 - **카테고리별 작성한 컨텐츠 저장 또는 수정시 출력 Mapper 호출** :pushpin: [코드 확인](https://github.com/KhaeMiin/Final_Team_Project/blob/master/src/main/java/data/project/ProjectService.java#L9)
   - Service는 두가지를 구현해야합니다.
 	  1. service interface [코드확인](https://github.com/KhaeMiin/Final_Team_Project/blob/master/src/main/java/data/project/ProjectMapper.java#L8)
