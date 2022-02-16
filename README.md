@@ -25,6 +25,8 @@
   - Maven 3.8
   - MySQL 8.0
   - Mybatis 2.2
+  - AWS EC2
+  - AWS RDS
 #### `Front-end`
   - JavaScript
   - JQuery 2.2.4
