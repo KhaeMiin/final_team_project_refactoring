@@ -283,11 +283,9 @@ public class MvcConfiguration implements WebMvcConfigurer{
 -   이클립스에서 Lombok이 적용이 안 되는 팀원 2명이 있었다. 결국, 방법을 찾지 못함.
 ​
 #### Try
--   API를 잘 사용하지 못했다. 다음 toy project를 진행할 땐 카카오 로그인API를 꼭 사용해보자.
 -   소켓 공부해서 채팅기능 꼭 만들 수 있도록 하자.
 -   **역할분담 명확하게 하기**
 -   git bash 명령어 공부하기
 -   AWS S3를 좀 더 공부해서 S3 Bucket 생성 후 이미지 또는 파일을 업로드 하기
 -   DB테이블 설계 시 컬럼명과 구조는 팀원 모두가 함께 철저하게 세우기(개인 프로젝트를 하더라도 마찬가지)
--   다음 toy project를 진행할 땐 스프링 @어노테이션에 대해 공부하여 @Service 부분에 **핵심 비즈니스 로직 담기**
 ​
