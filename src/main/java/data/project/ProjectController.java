@@ -36,10 +36,11 @@ public class ProjectController {
 	 * @Value("${file.upload.image}") String path;
 	 */
 	
-	@GetMapping("/project/start")
+	@GetMapping("/project/start")//프로젝트 올리기 클릭 시 화면
 	public String start (HttpSession session) {
+		//로그인상태 확인
 		String loginok = (String)session.getAttribute("loginok");
-		if(loginok == null) {
+		if(loginok == null) {//만약 로그인상태가 아니라면 로그인 페이지로 이동
 			return "redirect:/login/main";
 		}
 		return "/project_create/projectStart";
@@ -110,6 +111,7 @@ public class ProjectController {
 	@PostMapping("/project/defaultUpdate")
 	public String defaultUpdate(@ModelAttribute ProjectDTO dto,HttpServletRequest request) {
 
+		
 		String path = request.getSession().getServletContext().getRealPath("/thumbnail_image");
 		//String path = "/home/ec2-user/backup/thumbnail_image";
 
