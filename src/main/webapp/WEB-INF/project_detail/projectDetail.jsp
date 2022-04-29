@@ -278,14 +278,14 @@
 			</div>
 			<div class="creator-profile">
 				<span class="profile-img">
-					<img alt="프로필" src="../profile_image/${creatorImage}" class="creator-image" id=${dto.id }>
+					<img alt="프로필" src="../profile_image/${imgIntro.photo}" class="creator-image" id=${dto.id }>
 				</span>
 				<span class="creator-name">
 					${dto.name }
 				</span>
 			</div>
 			<div class="creator-intro">
-				${creatorIntro }
+				${imgIntro.introduce }
 			</div>
 			<div class="creator-message">
 				<button type="button" class="btn-creator-message">
