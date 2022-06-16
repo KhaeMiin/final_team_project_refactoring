@@ -19,8 +19,3 @@ mybatis:
   type-aliases-package: data.*
   mapper-locations:
   - /mappers/**/*.xml
-
-#file:
-#  upload:
-#    image: '/home/ec2-user/backup/thumbnail_image'
-    
