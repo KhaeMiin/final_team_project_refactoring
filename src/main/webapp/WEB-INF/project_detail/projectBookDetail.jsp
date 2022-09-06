@@ -13,12 +13,12 @@
 			<h2 class="project-intro-title">${dto.title } </h2>
 			<div class="creator-info">
 				<span class="profile-img">
-					<img alt="프로필" src="../profile_image/${creatorImage}" class="creator-image" id=${dto.id }>
+					<img alt="프로필" src="../profile_image/${imgIntro.photo}" class="creator-image" id=${dto.id }>
 				</span>
 				<span class="project-intro-creator-name">${dto.name}</span>
 			</div>
 			<div class="creator-intro">
-				${creatorIntro}
+				${imgIntro.introduce }
 			</div>
 			<div class="start-date">
 				<i class="fa fa-calendar-check-o"></i><fmt:formatDate value="${dto.start_date }" pattern="yyyy년 MM월 dd일"/>

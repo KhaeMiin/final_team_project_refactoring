@@ -9,14 +9,11 @@
 	<select id="getPaymentDate" parameterType="int" resultType="String">
 		select date_add(end_date,INTERVAL 1 DAY) from project where idx=#{idx}
 	</select>
-	<!-- 작가의 프로필 사진 가져오기 -->
-	<select id="getCreatorImage" parameterType="String" resultType="String">
-		select ifnull(photo, 'basic.jpg') from member where id=#{id}
+	
+	<select id="getCreateFile" parameterType="String" resultType="mdto" >
+		select CASE WHEN introduce IS NULL THEN "안녕하세요. 문의 사항은 메세지를 보내주세요." ELSE introduce END as introduce,CASE WHEN photo IS NULL THEN "basic.jpg" ELSE photo END as photo from member where id=#{id}
 	</select>
-	<!-- 작가 소개 가져오기 -->
-	<select id="getCreatorIntro" parameterType="String" resultType="String">
-		select ifnull(introduce, '안녕하세요. 문의 사항은 메세지를 보내주세요.') from member where id=#{id}
-	</select>
+	
 	<!-- 주소데이터가 없는 멤버의 주소를 ' ' 공백으로 출력 -->
 	<select id="getAddr" parameterType="String" resultType="ddto">
 		select ifnull(max(addr2),' ')as addr, ifnull(max(addr),' ') as addr2 from delivery where id=#{id} and pin=1
