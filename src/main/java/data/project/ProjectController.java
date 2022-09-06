@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -24,22 +25,20 @@ import org.springframework.web.servlet.ModelAndView;
 import data.member.MemberMapper;
 
 @Controller
+@RequiredArgsConstructor
 public class ProjectController {
 
-	@Autowired
-	ProjectService service;
-	@Autowired
-	ProjectMapper mapper;
-	@Autowired
-	MemberMapper memberMapper;
-	/*
-	 * @Value("${file.upload.image}") String path;
-	 */
+
+	private final ProjectService service;
+	private final ProjectMapper mapper;
+	private final MemberMapper memberMapper;
+
+
 
 	@GetMapping("/project/start")//프로젝트 올리기
 	public String start (HttpSession session) {
 		//로그인 상태 확인
-		String loginok = (String)session.getAttribute("loginok");
+		String loginok = (String)session.getAttribute("loginok"); //인터셉터를 이용해서 애플리케이션 전체에 수행될 로직 짜기
 		if(loginok == null) {//로그인이 아닌 경우 로그인페이지로 이동
 			return "redirect:/login/main";
 		}
@@ -88,7 +87,7 @@ public class ProjectController {
 	@ResponseBody
 	@PostMapping("/project/storyUpdate")
 	public void storyUpdate(@ModelAttribute ProjectDTO dto,
-							@RequestParam int idx,
+							@RequestParam Long idx,
 							@RequestParam String project_goal,
 							@RequestParam String project_budget,
 							@RequestParam String project_schedule,
@@ -127,7 +126,7 @@ public class ProjectController {
 		if (dto.getUpload().getOriginalFilename().equals("")) {//만약 이미지를 아무것도 업로드 하지 않은 상태면
 			dto.setThumbnail(null);
 		} else {//이미지가 업로드 된 상태라면
-			String uploadfile = service.getData(Integer.toString(dto.getIdx())).getThumbnail();
+			String uploadfile = service.getData(Long.toString(dto.getIdx())).getThumbnail();
 			//file객체 생성
 			File file1 = new File(path + "/" + uploadfile);
 			file1.delete();//기존 이미지는 삭제하기
@@ -151,7 +150,7 @@ public class ProjectController {
 	@ResponseBody
 	@PostMapping("/project/fundingUpdate")
 	public void fundingUpdate(@ModelAttribute ProjectDTO dto,
-							  @RequestParam int idx,
+							  @RequestParam Long idx,
 							  @RequestParam int target_amount,
 							  @RequestParam java.sql.Date start_date,
 							  @RequestParam String time_start,
@@ -220,7 +219,7 @@ public class ProjectController {
 
 	@ResponseBody
 	@PostMapping("/project/progressUpdata")
-	public void progressUpdata(ProjectDTO dto, @RequestParam int idx, @RequestParam String audit) {
+	public void progressUpdata(ProjectDTO dto, @RequestParam Long idx, @RequestParam String audit) {
 		dto.setIdx(idx);
 		dto.setAudit(audit);
 		service.progressUpdata(dto);
