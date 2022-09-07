@@ -13,7 +13,7 @@ public class ProjectDTO {
 	
 	private Long idx; //pk
 	private String name; //
-	private String id;
+	private String id; //회원 아이디
 	private String category; //카테고리
 	private String title; //제목
 	private String thumbnail; // 섬네일 이미지명
