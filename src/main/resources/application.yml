@@ -1,26 +1,25 @@
 server:
   port: 9002
   
- #jsp
+  #jsp
 spring:
   devtools:
     livereload:
       enabled: true
- 
- #mysql
+
+  #mysql
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/bunddeuk?createDatabaseIfNotExist=true
     username: root
     password: haemin1964
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 #mybatis
 mybatis:
   type-aliases-package: data.*
   mapper-locations:
-  - /mappers/**/*.xml
+    - /mappers/**/*.xml
 
 #file:
 #  upload:
 #    image: '/home/ec2-user/backup/thumbnail_image'
-    
