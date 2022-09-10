@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import data.member.MemberDTO;
+import data.dto.MemberDTO;
 import data.member.MemberService;
 
 @Controller
@@ -141,7 +141,7 @@ public class SettingController {
 		}else {//업로드한 경우
 			
 			//업로드된 파일명
-			String uploadfileName = service.getMember(dto.getNum()).getPhoto();
+			String uploadfileName = service.getMember(dto.getMember_id()).getPhoto();
 			//File 객체 생성
 			File file2 = new File(path + "/" + uploadfileName);
 			//파일 삭제

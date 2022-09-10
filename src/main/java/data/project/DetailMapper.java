@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import data.member.MemberDTO;
+import data.dto.MemberDTO;
 import data.mysetting.DeliveryDTO;
 
 @Mapper

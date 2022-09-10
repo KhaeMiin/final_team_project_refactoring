@@ -2,25 +2,42 @@ package data.member;
 
 import java.util.HashMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import data.domain.Member;
+import data.dto.MemberDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import data.repository.MemberRepository;
 
 @Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class MemberService {
-	@Autowired
-	MemberMapper mapper;
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
+
+	private final MemberMapper mapper;
+	private final PasswordEncoder passwordEncoder;
+
+	private final MemberRepository memberRepository;
+
+	/**
+	 * 회원가입
+	 * @param form
+	 */
+	@Transactional
+	public Member joinMember(MemberDTO.JoinMemberForm form) {
+		Member member = Member.joinMember(form);
+		member.hashPassword(passwordEncoder.encode(form.getPass()));
+		return memberRepository.save(member);
+	}
+
 	public void insertMember(MemberDTO dto) {
 		String encodedPassword = passwordEncoder.encode(dto.getPass());
 		dto.setPass(encodedPassword);
 		mapper.insertMember(dto);
 	}
-	public int getIdCheck(String id) {
-		return mapper.getIdCheck(id);
+	public int getIdCheck(String userId) {
+		return mapper.getIdCheck(userId);
 	}
 	public int getNameCheck(String name) {
 		return mapper.getNameCheck(name);
@@ -37,8 +54,8 @@ public class MemberService {
 	public MemberDTO getAllProfile(HashMap<String, String> map) {
 		return mapper.getAllProfile(map);
 	}
-	public MemberDTO getMember(Integer num) {
-		return mapper.getMember(num);
+	public MemberDTO getMember(Long member_id) {
+		return mapper.getMember(member_id);
 	} 
 	public void updateMemberPhoto(MemberDTO dto) {
 		mapper.updateMemberPhoto(dto);
@@ -72,22 +89,22 @@ public class MemberService {
 		mapper.updateMemberHp(dto);
 	}
 	
-	public String getUrl(String id) {
-		return mapper.getUrl(id);
+	public String getUrl(String user_id) {
+		return mapper.getUrl(user_id);
 	}
-	public String getPhoto(String id) {
-		return mapper.getPhoto(id);
+	public String getPhoto(String user_id) {
+		return mapper.getPhoto(user_id);
 	}
-	public String getIntroduce(String id) {
-		return mapper.getIntroduce(id);
-	}
-	
-	public void deleteMember(String num) {
-		mapper.deleteMember(num);
+	public String getIntroduce(String user_id) {
+		return mapper.getIntroduce(user_id);
 	}
 	
-	public String getName(String id) {
-		return mapper.getName(id);
+	public void deleteMember(Long member_id) {
+		mapper.deleteMember(member_id);
+	}
+	
+	public String getName(String user_id) {
+		return mapper.getName(user_id);
 	}
 	
 	public String getIdUrl(String url) {
@@ -98,8 +115,8 @@ public class MemberService {
 	}
 	
 	
-	public MemberDTO getAll(String id) {
-		return mapper.getAll(id);
+	public MemberDTO getAll(String user_id) {
+		return mapper.getAll(user_id);
 	}
 	public MemberDTO memberByEmail(String email) {
 		return mapper.memberByEmail(email);

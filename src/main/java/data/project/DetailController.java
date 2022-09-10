@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import data.member.MemberDTO;
+import data.dto.MemberDTO;
 import data.member.MemberService;
 import data.message.MessageService;
 import data.mysetting.DeliveryDTO;

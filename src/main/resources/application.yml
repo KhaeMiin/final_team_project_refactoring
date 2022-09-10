@@ -1,5 +1,5 @@
 server:
-  port: 9002
+  port: 8080
   
   #jsp
 spring:
@@ -13,6 +13,20 @@ spring:
     username: root
     password: haemin1964
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #         show_sql: true
+        format_sql: true
+  servlet:
+    multipart:
+      max-file-size: 1MB
+
+logging.level:
+  org.hibernate.SQL: debug
 
 #mybatis
 mybatis:

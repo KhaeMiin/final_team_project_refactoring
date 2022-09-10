@@ -1,8 +1,11 @@
 package data.project;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.ibatis.type.Alias;
 
 @Alias("pstdto")
+@Getter @Setter
 public class PresentDTO {
 	
 	private int num; //pk

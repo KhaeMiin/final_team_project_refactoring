@@ -1,5 +1,6 @@
 package data.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,9 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
+import static data.dto.MemberDTO.*;
+
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
     @Id @GeneratedValue
@@ -32,7 +35,7 @@ public class Member {
     private String authkey;
     private String oauth;
 
-    public Member(String name, String userId, String pass, String photo, String url, String introduce, String hp, String privacy, String email, int authStatus, String authkey, String oauth) {
+    protected Member(String name, String userId, String pass, String photo, String url, String introduce, String hp, String privacy, String email, int authStatus, String authkey, String oauth) {
         this.name = name;
         this.userId = userId;
         this.pass = pass;
@@ -48,5 +51,14 @@ public class Member {
         joinDate = LocalDateTime.now();
     }
 
+    //==회원가입 메서드==//
+    public static Member joinMember(JoinMemberForm form) {
+        return new Member(form.getName(), form.getUser_id(), form.getPass(), form.getPhoto(), form.getUrl(), form.getIntroduce(),
+                form.getHp(), form.getPrivacy(), form.getEmail(), form.getAuth_status(), form.getAuthkey(), form.getOauth());
+    }
 
+    public Member hashPassword(String passwordEncoder) {
+        this.pass = passwordEncoder;
+        return this;
+    }
 }

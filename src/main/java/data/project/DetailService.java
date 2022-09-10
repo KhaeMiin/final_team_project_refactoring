@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import data.member.MemberDTO;
+import data.dto.MemberDTO;
 import data.mysetting.DeliveryDTO;
 
 @Service

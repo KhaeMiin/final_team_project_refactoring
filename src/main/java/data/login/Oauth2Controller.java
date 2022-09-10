@@ -16,14 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import data.member.MemberDTO;
+import data.dto.MemberDTO;
 import data.member.MemberService;
 
 @Controller
@@ -129,7 +128,7 @@ public class Oauth2Controller {
     	
     	String kakaoId = str.substring(0,str.lastIndexOf("@"));
     	
-    	member.setId("KKO-"+kakaoId);
+    	member.setUser_id("KKO-"+kakaoId);
     	member.setPass(garcagePassword.toString());
     	member.setEmail(kakaoProfile.getKakao_account().getEmail());
     	member.setName(kakaoProfile.getProperties().getNickname());
@@ -137,19 +136,19 @@ public class Oauth2Controller {
     	String url = generatedString;
 		member.setUrl(url);
     	
-    	int check = memberService.getIdCheck(member.getId());
+    	int check = memberService.getIdCheck(member.getUser_id());
     	if(check != 1) {
     		memberService.insertMember(member);
     	}
     	
     	
-		MemberDTO dto = memberService.getAll(member.getId());
+		MemberDTO dto = memberService.getAll(member.getUser_id());
 		String profileImage = dto.getPhoto();
 			
 		session.setAttribute("profileImage", profileImage);
 		
 		session.setAttribute("nickName", member.getName());
-    	session.setAttribute("id", member.getId());
+    	session.setAttribute("id", member.getUser_id());
 		session.setAttribute("loginok", "yes");
     	
         return "redirect:main";

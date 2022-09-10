@@ -6,7 +6,8 @@ import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import data.dto.MemberDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,17 +16,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 @Controller
+@RequiredArgsConstructor
 public class MemberController {
 
 	String url = "";
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
 
-	@Autowired
-	MemberService service;
+	private final PasswordEncoder passwordEncoder;
+
+	private final MemberService service;
 	
 	@GetMapping("/member/home")
 	public String home() {
@@ -124,15 +123,15 @@ public class MemberController {
 	}
 	
 	@GetMapping("/member/passcheck") //@responsebody 를 넣어주면 rest컨트롤러처럼 변경
-	public @ResponseBody Map<String, Integer> passCheckProcess(@RequestParam int num,@RequestParam String pass) 
+	public @ResponseBody Map<String, Integer> passCheckProcess(@RequestParam Long memberId,@RequestParam String pass)
 	{
 		
-		MemberDTO dto = service.getMember(num);
+		MemberDTO dto = service.getMember(memberId);
 		int check = 0;
 		if(passwordEncoder.matches(pass, dto.getPass())) {
 			//db로부터 비번이 맞는지 체크
 			HashMap<String, String> map = new HashMap<String, String>();
-			String num1 = Integer.toString(num);
+			String num1 = Long.toString(memberId);
 			map.put("num", num1);
 			map.put("pass", dto.getPass());
 			//pass 체크
@@ -147,17 +146,17 @@ public class MemberController {
 	}
 	
 	@PostMapping("/member/memberdelete")
-	public String delete(@RequestParam String num, @RequestParam String pass,HttpSession session){
-		MemberDTO dto = service.getMember(Integer.parseInt(num));
+	public String delete(@RequestParam Long memberId, @RequestParam String pass,HttpSession session){
+		MemberDTO dto = service.getMember(memberId);
 		if(passwordEncoder.matches(pass, dto.getPass())) {
 			//db로부터 비번이 맞는지 체크
 			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("num", num);
+			map.put("num", Long.toString(memberId));
 			map.put("pass", dto.getPass());
 			int check = service.getCheckPass(map);
 			if(check == 1) {
 				//비번이 맞을경우 삭제
-			service.deleteMember(num);
+			service.deleteMember(memberId);
 			session.removeAttribute("loginok");
 			}
 		}
@@ -166,8 +165,8 @@ public class MemberController {
 	
 
 	@PostMapping("/member/kakaodelete")
-	public String kakaoDelete(@RequestParam String num,HttpSession session){
-		service.deleteMember(num);
+	public String kakaoDelete(@RequestParam Long memberId,HttpSession session){
+		service.deleteMember(memberId);
 		session.removeAttribute("loginok");
 		return "redirect:home";
 	}
