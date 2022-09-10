@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
+//@Entity
 @Getter
 @NoArgsConstructor
 public class Project {
@@ -15,9 +15,12 @@ public class Project {
     @Column(name = "project_id")
     private Long id; //pk(idx)
 
-    @ManyToOne
+/*    @ManyToOne
     @JoinColumn(name = "member_id")
-    private Member member; //기존dto에서 name, id
+    private Member member; //기존dto에서 name, id*/
+
+    private String name;
+    private String userId;
 
     private String category;
     private String title;
