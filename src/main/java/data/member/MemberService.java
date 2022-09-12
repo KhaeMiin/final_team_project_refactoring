@@ -12,7 +12,6 @@ import data.repository.MemberRepository;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class MemberService {
 
 	private final MemberMapper mapper;
