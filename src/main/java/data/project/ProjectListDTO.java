@@ -1,9 +1,7 @@
 package data.project;
 
 
-import org.apache.ibatis.type.Alias;
 
-@Alias("PLDTO")
 public class ProjectListDTO {
 	private String search = "no";
 	private String state = "no";

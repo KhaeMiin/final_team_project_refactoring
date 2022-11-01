@@ -1,8 +1,6 @@
 package data.profile;
 
-import org.apache.ibatis.type.Alias;
 
-@Alias("sdetaildto")
 public class SupportDetailDTO {
 	
 	private int num; // 후원번호

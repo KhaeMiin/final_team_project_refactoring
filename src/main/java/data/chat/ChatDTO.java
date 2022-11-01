@@ -2,10 +2,8 @@ package data.chat;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.ibatis.type.Alias;
 
 
-@Alias("CDTO")
 @Getter @Setter
 public class ChatDTO {
 	private String num;

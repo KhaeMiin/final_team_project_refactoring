@@ -6,9 +6,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.ibatis.type.Alias;
 
-@Alias("mdto") // 별명 (MemberSQL.xml에서 사용할 수 있도록)
 @Getter @Setter
 public class MemberDTO {
 	private Long member_id; //pk (num > member_id)

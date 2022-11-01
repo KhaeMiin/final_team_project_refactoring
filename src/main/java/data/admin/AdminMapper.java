@@ -2,12 +2,10 @@ package data.admin;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
 
 import data.dto.MemberDTO;
 import data.project.ProjectDTO;
 
-@Mapper
 public interface AdminMapper {
 	
 	public List<ProjectDTO> getProjectList(int start, int perpage);

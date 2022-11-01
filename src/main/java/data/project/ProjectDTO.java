@@ -4,10 +4,8 @@ import java.sql.Date;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.ibatis.type.Alias;
 import org.springframework.web.multipart.MultipartFile;
 
-@Alias("pdto")
 @Getter @Setter
 public class ProjectDTO {
 

@@ -4,9 +4,7 @@ import java.sql.Date;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.ibatis.type.Alias;
 
-@Alias("sptdto")
 @Getter @Setter
 public class SupportDTO {
 

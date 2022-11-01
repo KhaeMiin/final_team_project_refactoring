@@ -1,3 +1,4 @@
+/*
 package data.email;
 
 import java.util.Random;
@@ -131,4 +132,4 @@ public class EmailServiceImpl{
 		    }
 
 
-}
+}*/

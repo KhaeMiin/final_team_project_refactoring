@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan({"data.*", "com.team.project"})
-@MapperScan("data.*")
 public class FinalProjectApplication {
 
 	public static void main(String[] args) {

@@ -5,9 +5,7 @@ import java.sql.Timestamp;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.ibatis.type.Alias;
 
-@Alias("ndto")
 @Getter @Setter
 public class NoticeDTO {
 	

@@ -1,8 +1,5 @@
 package data.keyword;
 
-import org.apache.ibatis.type.Alias;
-
-@Alias("KDTO")
 public class KeywordDTO {
 	private int num;
 	private String keyword;

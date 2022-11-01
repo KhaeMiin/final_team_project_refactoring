@@ -1,8 +1,6 @@
 package data.message;
 
-import org.apache.ibatis.type.Alias;
 
-@Alias("msgdto")
 public class MessageDTO {
 	
 	private String num;

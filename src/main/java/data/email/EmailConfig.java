@@ -1,3 +1,4 @@
+/*
 package data.email;
 
 import java.util.Properties;
@@ -54,4 +55,4 @@ public class EmailConfig {
 		}
 	    
 
-}
+}*/

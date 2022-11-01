@@ -1,3 +1,4 @@
+/*
 package data.email;
 
 
@@ -57,7 +58,8 @@ public class EmailController {
 		}
 		
 
-	/*	@PostMapping("/verifyCode")
+	*/
+/*	@PostMapping("/verifyCode")
 		@ResponseBody
 		public int verifyCode(String code) {
 			logger.info("Post verifyCode");
@@ -70,7 +72,8 @@ public class EmailController {
 			}
 			
 			return result;
-		}*/
+		}*//*
+
 		
 		 @GetMapping("/verifyCode")
 		 public String signUpConfirm(@RequestParam String email, String authKey, ModelAndView mav){
@@ -88,4 +91,4 @@ public class EmailController {
 		 
 		 
 		 
-}
+}*/

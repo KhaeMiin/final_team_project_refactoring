@@ -2,10 +2,6 @@ package data.chat;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-
-
-@Mapper
 public interface ChatMapper {
 	List<ChatDTO> getChatList(String id);
 	List<ChatDTO> getRoomContentList(ChatDTO dto);

@@ -2,9 +2,7 @@ package data.mysetting;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.ibatis.type.Alias;
 
-@Alias("ddto")
 @Getter @Setter
 public class DeliveryDTO {
 	private int num;
