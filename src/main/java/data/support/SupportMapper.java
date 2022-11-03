@@ -2,9 +2,6 @@ package data.support;
 
 import java.util.HashMap;
 
-import org.apache.ibatis.annotations.Mapper;
-
-@Mapper
 public interface SupportMapper {
 
 	public void insertSupportData(SupportDTO dto);

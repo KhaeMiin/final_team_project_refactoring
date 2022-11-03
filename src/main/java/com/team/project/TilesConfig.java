@@ -1,3 +1,4 @@
+/*
 package com.team.project;
 
 import org.springframework.context.annotation.Bean;
@@ -38,3 +39,4 @@ public class TilesConfig {
 	      return resolver;
 	   }
 }
+*/

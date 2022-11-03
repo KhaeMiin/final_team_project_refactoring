@@ -3,12 +3,10 @@ package data.project;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
 
 import data.dto.MemberDTO;
 import data.mysetting.DeliveryDTO;
 
-@Mapper
 public interface DetailMapper {
 	public ProjectDTO getData(int idx);
 	public String getPaymentDate(int idx);
