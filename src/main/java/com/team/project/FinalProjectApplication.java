@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"data.*", "com.team.project"})
+//@ComponentScan({"data.*", "com.team.project"})
 public class FinalProjectApplication {
 
 	public static void main(String[] args) {

@@ -18,8 +18,6 @@ class MemberServiceTest {
     MemberService memberService;
     @Autowired
     MemberRepository memberRepository;
-    @Autowired
-    MemberMapper memberMapper;
 
     @Test
     void join() {
