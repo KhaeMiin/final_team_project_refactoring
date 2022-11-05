@@ -15,7 +15,7 @@ public class Member {
     @Id
     @GeneratedValue
     private Long id;
-    private String name; //이름
+    private String nickname; //닉네임
     private String userId; //아이디
     private String pass; //비밀번호
     private String photo; //프로필?
@@ -29,8 +29,8 @@ public class Member {
     private String authKey;
     private String oauth;
 
-    public Member(String name, String userId, String pass, String photo, String url, String introduce, String hp, String privacy, LocalDateTime joinDate, String email, int authStatus, String authKey, String oauth) {
-        this.name = name;
+    public Member(String nickname, String userId, String pass, String photo, String url, String introduce, String hp, String privacy, LocalDateTime joinDate, String email, int authStatus, String authKey, String oauth) {
+        this.nickname = nickname;
         this.userId = userId;
         this.pass = pass;
         this.photo = photo;

@@ -15,9 +15,9 @@ class MemberRepositoryTest {
     @Autowired
     private MemberRepository memberRepository;
 
-    @DisplayName("모든 회원 조회")
+    @DisplayName("회원 가입")
     @Test
-    void selectAllMembersData() {
+    void joinMember() {
 
     }
 
