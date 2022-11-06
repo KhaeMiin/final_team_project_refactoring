@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import data.dto.MemberDTO;
+import data.dto.MemberDTO1;
 import data.member.MemberService;
 import data.message.MessageService;
 import data.mysetting.DeliveryDTO;
@@ -43,7 +43,7 @@ public class DetailController {
 		ProjectDTO dto = service.getData(idx);
 		List<PresentDTO> pstList = service.getPresentData(idx);
 		
-		MemberDTO imgIntro = service.getCreateFile(dto.getId());
+		MemberDTO1 imgIntro = service.getCreateFile(dto.getId());
 		
 		
 		String pymDate1 = service.getPaymentDate(idx).substring(0,4);
@@ -75,7 +75,7 @@ public class DetailController {
 		ModelAndView mview = new ModelAndView();
 		ProjectDTO dto = service.getData(idx);
 
-		MemberDTO imgIntro = service.getCreateFile(dto.getId());
+		MemberDTO1 imgIntro = service.getCreateFile(dto.getId());
 		System.out.println("test=" + imgIntro.getPhoto());
 		
 		mview.addObject("dto", dto);
@@ -94,7 +94,7 @@ public class DetailController {
 		String id = (String)session.getAttribute("id");
 		
 		ProjectDTO dto = service.getData(idx);
-		MemberDTO mdto = memberService.getAll(id);
+		MemberDTO1 mdto = memberService.getAll(id);
 		DeliveryDTO ddto = service.getAddr(id);
 		
 		String pymDate1 = service.getPaymentDate(idx).substring(0,4);
@@ -133,14 +133,14 @@ public class DetailController {
 	
 	@ResponseBody
 	@PostMapping("/payment/hpUpdate")
-	public String setHp(MemberDTO dto) {
+	public String setHp(MemberDTO1 dto) {
 		service.setHp(dto);
 		return dto.getHp();
 	}
 	
 	@ResponseBody
 	@PostMapping("/payment/emailUpdate")
-	public String setEmail(MemberDTO dto) {
+	public String setEmail(MemberDTO1 dto) {
 		service.setEmail(dto);
 		return dto.getEmail();
 	}

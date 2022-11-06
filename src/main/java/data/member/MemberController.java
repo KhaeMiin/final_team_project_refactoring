@@ -6,7 +6,7 @@ import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
-import data.dto.MemberDTO;
+import data.dto.MemberDTO1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -57,7 +57,7 @@ public class MemberController {
 	}
 
 	@PostMapping("/member/insert")
-	public String memberInsert(@ModelAttribute MemberDTO dto) {
+	public String memberInsert(@ModelAttribute MemberDTO1 dto) {
 
 		int leftLimit = 48; // numeral '0'
 		int rightLimit = 122; // letter 'z'
@@ -88,7 +88,7 @@ public class MemberController {
 	
 	
 	@GetMapping("/member/emailcheck") //@responsebody 를 넣어주면 rest컨트롤러처럼 변경
-	public @ResponseBody Map<String, Integer> emailcheck(@ModelAttribute MemberDTO dto) 
+	public @ResponseBody Map<String, Integer> emailcheck(@ModelAttribute MemberDTO1 dto)
 	{
 		
 		int check = service.getEmailCheck(dto.getEmail());
@@ -126,7 +126,7 @@ public class MemberController {
 	public @ResponseBody Map<String, Integer> passCheckProcess(@RequestParam Long memberId,@RequestParam String pass)
 	{
 		
-		MemberDTO dto = service.getMember(memberId);
+		MemberDTO1 dto = service.getMember(memberId);
 		int check = 0;
 		if(passwordEncoder.matches(pass, dto.getPass())) {
 			//db로부터 비번이 맞는지 체크
@@ -147,7 +147,7 @@ public class MemberController {
 	
 	@PostMapping("/member/memberdelete")
 	public String delete(@RequestParam Long memberId, @RequestParam String pass,HttpSession session){
-		MemberDTO dto = service.getMember(memberId);
+		MemberDTO1 dto = service.getMember(memberId);
 		if(passwordEncoder.matches(pass, dto.getPass())) {
 			//db로부터 비번이 맞는지 체크
 			HashMap<String, String> map = new HashMap<String, String>();

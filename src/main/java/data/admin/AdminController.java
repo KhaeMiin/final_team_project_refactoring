@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import data.dto.MemberDTO;
+import data.dto.MemberDTO1;
 import data.member.MemberService;
 import data.profile.ProfileService;
 import data.project.ProjectDTO;
@@ -36,7 +36,7 @@ public class AdminController {
 		
 		ModelAndView mview = new ModelAndView();
 		String id = (String) session.getAttribute("id");
-		MemberDTO dto = memberSerivce.getAll(id);
+		MemberDTO1 dto = memberSerivce.getAll(id);
 		
 		int totalCount = service.getTotalCount();
 		
@@ -111,7 +111,7 @@ public class AdminController {
 			) {
 		
 		String id = (String) session.getAttribute("id");
-		MemberDTO dto = memberSerivce.getAll(id);
+		MemberDTO1 dto = memberSerivce.getAll(id);
 		
 		int totalCount = service.getTotalMemberCount();
 		
@@ -133,7 +133,7 @@ public class AdminController {
 		start = (currentPage - 1) * perPage;
 		
 		ModelAndView mview = new ModelAndView();
-		List<MemberDTO> mlist = service.getMemberList(start, perPage);
+		List<MemberDTO1> mlist = service.getMemberList(start, perPage);
 		
 		mview.addObject("id", id);
 		mview.addObject("dto", dto);
@@ -154,7 +154,7 @@ public class AdminController {
 			) {
 		
 		ModelAndView mview = new ModelAndView();
-		MemberDTO mdto = memberSerivce.getAll(id);
+		MemberDTO1 mdto = memberSerivce.getAll(id);
 		System.out.println(id);
 		mview.addObject("mdto", mdto);
 		mview.addObject("currentPage", currentPage);

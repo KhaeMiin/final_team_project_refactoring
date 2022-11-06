@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import data.dto.MemberDTO;
+import data.dto.MemberDTO1;
 import data.member.MemberService;
 
 
@@ -55,7 +55,7 @@ public class LoginController {
 			 return "/login/passFail";  
 		 }
 		
-		 MemberDTO dto = service.getAll(id);
+		 MemberDTO1 dto = service.getAll(id);
 		 
 		 String oauthNullCheck = dto.getOauth();
 		 if(oauthNullCheck != null) {

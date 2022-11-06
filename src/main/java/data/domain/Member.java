@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-import static data.dto.MemberDTO.*;
+import static data.dto.MemberDTO1.*;
 
 @Entity
 @Getter

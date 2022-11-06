@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import data.dto.MemberDTO;
+import data.dto.MemberDTO1;
 import data.project.ProjectDTO;
 
 @Service
@@ -38,7 +38,7 @@ public class AdminService {
 		
 		return mapper.getTotalMemberCount();
 	}
-	public List<MemberDTO> getMemberList(int start, int perpage) {
+	public List<MemberDTO1> getMemberList(int start, int perpage) {
 		
 		return mapper.getMemberList(start, perpage);
 	}

@@ -29,7 +29,7 @@ public class Member {
     private String authKey;
     private String oauth;
 
-    public Member(String nickname, String userId, String pass, String photo, String url, String introduce, String hp, String privacy, LocalDateTime joinDate, String email, int authStatus, String authKey, String oauth) {
+    private Member(String nickname, String userId, String pass, String photo, String url, String introduce, String hp, String privacy, LocalDateTime joinDate, String email, int authStatus, String authKey, String oauth) {
         this.nickname = nickname;
         this.userId = userId;
         this.pass = pass;
@@ -43,6 +43,19 @@ public class Member {
         this.authStatus = authStatus;
         this.authKey = authKey;
         this.oauth = oauth;
+    }
+
+    private Member(String nickname, String userId, String pass, LocalDateTime joinDate, String email) {
+        this.nickname = nickname;
+        this.userId = userId;
+        this.pass = pass;
+        this.joinDate = joinDate;
+        this.email = email;
+    }
+
+    //==생성 메서드(회원가입)==//
+    public static Member joinMember(MemberDto.JoinMemberForm form) {
+        return new Member(form.getNickname(), form.getUserId(), form.getPass(), LocalDateTime.now(), form.getEmail());
     }
 
     //==비밀번호 암호화==//

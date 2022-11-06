@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import data.dto.MemberDTO;
+import data.dto.MemberDTO1;
 import data.member.MemberService;
 
 @Controller
@@ -40,7 +40,7 @@ public class SettingController {
 		String id = (String) session.getAttribute("id");
 		
 		
-		MemberDTO dto = service.getAll(id);
+		MemberDTO1 dto = service.getAll(id);
 		
 	//	String content = dto.getIntroduce().replaceAll("<br>","\r\n");
 		
@@ -67,7 +67,7 @@ public class SettingController {
 		String id = (String) session.getAttribute("id");
 		
 		
-		MemberDTO dto = service.getAll(id);
+		MemberDTO1 dto = service.getAll(id);
 		
 		
 		List<DeliveryDTO> list = deliveryservice.getPinList(id);
@@ -127,7 +127,7 @@ public class SettingController {
 	} 
 	
 	@PostMapping("/setting/updatephoto")
-	public String updatePhoto(@RequestParam MultipartFile file,@ModelAttribute MemberDTO dto, HttpSession session) {
+	public String updatePhoto(@RequestParam MultipartFile file, @ModelAttribute MemberDTO1 dto, HttpSession session) {
 		
 		
 		//업로드할 폴더 지정
@@ -167,14 +167,14 @@ public class SettingController {
 	}
 	
 	@PostMapping("/setting/updatename")
-	public String updateName(@ModelAttribute MemberDTO dto) {
+	public String updateName(@ModelAttribute MemberDTO1 dto) {
 		
 		service.updateMemberName(dto);
 		return "redirect:main";
 	}
 	
 	@PostMapping("/setting/updateurl")
-	public String updateUrl(HttpSession session,@ModelAttribute MemberDTO dto) {
+	public String updateUrl(HttpSession session,@ModelAttribute MemberDTO1 dto) {
 		session.removeAttribute("url");
 		session.setAttribute("url",dto.getUrl());
 		service.updateMemberUrl(dto);
@@ -182,7 +182,7 @@ public class SettingController {
 	}
 	
 	@PostMapping("/setting/privacyupdate")
-	public String privacyupdate(@ModelAttribute MemberDTO dto) {
+	public String privacyupdate(@ModelAttribute MemberDTO1 dto) {
 		if(dto.getPrivacy()==null) {
 			dto.setPrivacy("0");
 		}else {
@@ -193,7 +193,7 @@ public class SettingController {
 	}
 	
 	@PostMapping("/setting/updateintroduce")
-	public String updateIntroduce(@ModelAttribute MemberDTO dto) {
+	public String updateIntroduce(@ModelAttribute MemberDTO1 dto) {
 		
 		String content = dto.getIntroduce().replaceAll("\r\n","<br>");
 		
@@ -204,14 +204,14 @@ public class SettingController {
 	}
 	
 	@PostMapping("/setting/updatepass")
-	public String updatePass(@ModelAttribute MemberDTO dto) {
+	public String updatePass(@ModelAttribute MemberDTO1 dto) {
 	//	System.out.println("패스워드 업데이트성공");
 		service.updateMemberPass(dto);
 		return "redirect:main";
 	}
 	
 	@PostMapping("/setting/updatehp")
-	public String updateHp(@ModelAttribute MemberDTO dto) {
+	public String updateHp(@ModelAttribute MemberDTO1 dto) {
 		service.updateMemberHp(dto);
 		return "redirect:main";
 	}
@@ -226,7 +226,7 @@ public class SettingController {
 		
 		String id = (String) session.getAttribute("id");
 		
-		MemberDTO dto = service.getAll(id);
+		MemberDTO1 dto = service.getAll(id);
 		
 	//	System.out.println(dto.getOauth());
 		
@@ -243,7 +243,7 @@ public class SettingController {
 		
 		String id = (String) session.getAttribute("id");
 		
-		MemberDTO dto = service.getAll(id);
+		MemberDTO1 dto = service.getAll(id);
 		
 		mview.addObject("dto", dto);
 		mview.setViewName("/mysetting/validation");

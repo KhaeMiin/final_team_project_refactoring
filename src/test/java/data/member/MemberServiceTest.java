@@ -2,14 +2,13 @@ package data.member;
 
 import com.team.project.FinalProjectApplication;
 import data.domain.Member;
-import data.dto.MemberDTO;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import data.repository.MemberRepository;
 
-import static data.dto.MemberDTO.*;
+import static data.dto.MemberDTO1.*;
 
 @SpringBootTest(classes = FinalProjectApplication.class)
 class MemberServiceTest {

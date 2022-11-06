@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import data.dto.MemberDTO;
+import data.dto.MemberDTO1;
 import data.member.MemberMapper;
 
 
@@ -26,7 +26,7 @@ public class ChatController {
 	public String openPersonalChat(Model model, String id) {
 		
 		/* System.out.println(id); */
-		MemberDTO dto = memberMapper.getAll(id);
+		MemberDTO1 dto = memberMapper.getAll(id);
 		model.addAttribute("dto", dto);
 		return "/chat/chat/personalChat";
 	}

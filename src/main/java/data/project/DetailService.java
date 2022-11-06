@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import data.dto.MemberDTO;
+import data.dto.MemberDTO1;
 import data.mysetting.DeliveryDTO;
 
 @Service
@@ -23,7 +23,7 @@ public class DetailService {
 	}
 	
 	//작가의 프로필 이미지와 introduce 가져오기
-	public MemberDTO getCreateFile(String id) {
+	public MemberDTO1 getCreateFile(String id) {
 		return mapper.getCreateFile(id);
 	}
 	
@@ -34,12 +34,12 @@ public class DetailService {
 	}
 	
 	//핸드폰 번호가 null인 멤버들 핸드폰 번호 넣어주기
-	public void setHp(MemberDTO dto) {
+	public void setHp(MemberDTO1 dto) {
 		mapper.setHp(dto);
 	}
 	
 	//email일 null인 멤버들 email주소 넣어주기
-	public void setEmail(MemberDTO dto) {
+	public void setEmail(MemberDTO1 dto) {
 		mapper.setEmail(dto);
 	}
 	

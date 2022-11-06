@@ -2,13 +2,12 @@ package data.dto;
 
 import java.sql.Timestamp;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class MemberDTO {
+public class MemberDTO1 {
 	private Long member_id; //pk (num > member_id)
 	private String name;
 	private String user_id;

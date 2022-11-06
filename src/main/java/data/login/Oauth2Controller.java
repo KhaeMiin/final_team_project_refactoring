@@ -22,7 +22,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import data.dto.MemberDTO;
+import data.dto.MemberDTO1;
 import data.member.MemberService;
 
 @Controller
@@ -120,7 +120,7 @@ public class Oauth2Controller {
     	
     	UUID garcagePassword = UUID.randomUUID();
     	
-    	MemberDTO member = new MemberDTO();
+    	MemberDTO1 member = new MemberDTO1();
     	String str = kakaoProfile.getKakao_account().getEmail();
     
     //	System.out.println(kakaoProfile.getId());
@@ -142,7 +142,7 @@ public class Oauth2Controller {
     	}
     	
     	
-		MemberDTO dto = memberService.getAll(member.getUser_id());
+		MemberDTO1 dto = memberService.getAll(member.getUser_id());
 		String profileImage = dto.getPhoto();
 			
 		session.setAttribute("profileImage", profileImage);

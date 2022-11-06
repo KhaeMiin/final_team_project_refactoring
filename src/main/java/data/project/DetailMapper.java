@@ -4,18 +4,18 @@ import java.util.HashMap;
 import java.util.List;
 
 
-import data.dto.MemberDTO;
+import data.dto.MemberDTO1;
 import data.mysetting.DeliveryDTO;
 
 public interface DetailMapper {
 	public ProjectDTO getData(int idx);
 	public String getPaymentDate(int idx);
 	
-	public MemberDTO getCreateFile(String id); //프로필사진, introdoce
+	public MemberDTO1 getCreateFile(String id); //프로필사진, introdoce
 	
 	public DeliveryDTO getAddr(String id);
-	public void setHp(MemberDTO dto);
-	public void setEmail(MemberDTO dto);
+	public void setHp(MemberDTO1 dto);
+	public void setEmail(MemberDTO1 dto);
 	public void insertDelivery(DeliveryDTO ddto);
 	public int getLikeCheck(HashMap<String, Object> map);
 	public void insertLikeProject(HashMap<String, Object> map);

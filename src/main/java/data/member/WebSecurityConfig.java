@@ -1,3 +1,4 @@
+/*
 package data.member;
 
 import org.springframework.context.annotation.Bean;
@@ -31,4 +32,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .formLogin().disable()
          .headers().frameOptions().disable();
    }
-}
+}*/

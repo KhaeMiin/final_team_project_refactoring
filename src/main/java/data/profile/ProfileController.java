@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import data.dto.MemberDTO;
+import data.dto.MemberDTO1;
 import data.member.MemberService;
 import data.project.DetailService;
 import data.project.ProjectDTO;
@@ -43,7 +43,7 @@ public class ProfileController {
 	@PostMapping("/comment/profile")
 	public String moveProfile(Model model, String id) {
 		
-		MemberDTO movedto = memberService.getAll(id);
+		MemberDTO1 movedto = memberService.getAll(id);
 		model.addAttribute("id",id); //원섭
 		model.addAttribute("movedto", movedto);
 		
@@ -84,7 +84,7 @@ public class ProfileController {
 	@PostMapping("/comment/sponsored")
 	public String moveToS(Model model, String id) {
 		
-		MemberDTO movedto = memberService.getAll(id);
+		MemberDTO1 movedto = memberService.getAll(id);
 		model.addAttribute("id",id); //원섭
 		model.addAttribute("movedto", movedto);
 		
@@ -101,7 +101,7 @@ public class ProfileController {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("id", id);
 			map.put("url", url);
-			MemberDTO dto = memberService.getAllProfile(map);
+			MemberDTO1 dto = memberService.getAllProfile(map);
 			model.addAttribute("dto", dto);
 			
 			//String url = memberService.getUrl(id);
@@ -120,7 +120,7 @@ public class ProfileController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
 		map.put("url", url);
-		MemberDTO dto = memberService.getAllProfile(map);
+		MemberDTO1 dto = memberService.getAllProfile(map);
 		
 		List<SupportDetailDTO> supportLsit = profileService.getSupportProject(id);
 		
@@ -141,7 +141,7 @@ public class ProfileController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
 		map.put("url", url);
-		MemberDTO dto = memberService.getAllProfile(map);
+		MemberDTO1 dto = memberService.getAllProfile(map);
 		mview.addObject("dto", dto);
 		
 		SupportDetailDTO sdto = profileService.getSupportData(num);
@@ -170,7 +170,7 @@ public class ProfileController {
 		HashMap<String, String> map1 = new HashMap<String, String>();
 		map1.put("id", id);
 		map1.put("url", url);
-		MemberDTO dto = memberService.getAllProfile(map1);
+		MemberDTO1 dto = memberService.getAllProfile(map1);
 		
 		ModelAndView mview = new ModelAndView();
 		String name = memberService.getName(id);
@@ -318,7 +318,7 @@ public class ProfileController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
 		map.put("url", url);
-		MemberDTO dto = memberService.getAllProfile(map);
+		MemberDTO1 dto = memberService.getAllProfile(map);
 		
 		String name = memberService.getName(id);
 		//System.out.println(name);

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import data.dto.MemberDTO;
+import data.dto.MemberDTO1;
 import data.member.MemberMapper;
 import data.member.MemberService;
 
@@ -64,7 +64,7 @@ public class MessageController {
 		List<MessageDTO> recvList = service.getReceivedList(name, start, perPage);
 		//System.out.println(recvList);
 		
-		MemberDTO dto = memberService.getAll(id);
+		MemberDTO1 dto = memberService.getAll(id);
 		//System.out.println("받은"+totalCount);
 		mview.addObject("dto", dto);
 		
@@ -91,7 +91,7 @@ public class MessageController {
 		String name = memberService.getName(id);
 		//System.out.println("상대방이름"+otherParty_name);
 		//System.out.println("리스트"+sendList);
-		MemberDTO dto = memberService.getAll(id);
+		MemberDTO1 dto = memberService.getAll(id);
 		
 		int totalCount = service.getSentTotalCount(name);
 		

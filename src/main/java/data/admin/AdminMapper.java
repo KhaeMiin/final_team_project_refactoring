@@ -3,7 +3,7 @@ package data.admin;
 import java.util.List;
 
 
-import data.dto.MemberDTO;
+import data.dto.MemberDTO1;
 import data.project.ProjectDTO;
 
 public interface AdminMapper {
@@ -15,7 +15,7 @@ public interface AdminMapper {
 	public String getAuditCount();
 	
 	public int getTotalMemberCount();
-	public List<MemberDTO> getMemberList(int start, int perpage);
+	public List<MemberDTO1> getMemberList(int start, int perpage);
 	public void deleteMember(String num);
 	
 
